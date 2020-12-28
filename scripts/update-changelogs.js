@@ -11,19 +11,23 @@ const parseChangelog = require('changelog-parser');
 const PACKAGES_PATH = resolve(__dirname, '../packages');
 const TEMP_FILE_PATH = resolve(__dirname, './tmp-comparison.json');
 
-var mode = process.argv.slice(2);
+run();
 
-// Check argument
-if (mode.length != 1) {
-  console.warn('1 argument expected (--preversion or --version)');
-  process.exit(1);
-} else if (mode[0] == '--preversion') {
-  before();
-} else if (mode[0] == '--version') {
-  after();
-} else {
-  console.error(`Unrecognized flag ${mode[0]}`);
-  process.exit(1);
+async function run() {
+  const mode = process.argv.slice(2);
+
+  // Check argument
+  if (mode.length != 1) {
+    console.warn('1 argument expected (--preversion or --version)');
+    process.exit(1);
+  } else if (mode[0] == '--preversion') {
+    before();
+  } else if (mode[0] == '--version') {
+    after();
+  } else {
+    console.error(`Unrecognized flag ${mode[0]}`);
+    process.exit(1);
+  }
 }
 
 /**
